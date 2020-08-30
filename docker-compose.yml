@@ -1,0 +1,38 @@
+version: '2.4'
+
+services:
+
+  node-app:
+    build:
+      context: .
+      args:
+        - DATABASE_USER=postgres
+        - DATABASE_PASSWORD=root
+        - DATABASE_HOST=db
+        - DATABASE_PORT=5432
+        - DATABASE_NAME=<your database name>
+    #  command would over-ride CMD in Dockerfile
+    command: node -r dotenv/config .
+    ports:
+      - "80:3000"
+      - "9229:9229"
+      - "9230:9230"
+
+  db:
+    build:
+      context: ./src/postgresql
+      dockerfile: Dockerfile
+    expose:
+      - 5432
+    environment: 
+      - POSTGRES_USER=<add your postgres user here>
+      - POSTGRES_PASSWORD=<add your postgres pass here>
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      start_period: 10s
+      timeout: 4s
+      retries: 3
+
+volumes:
+  notused:
