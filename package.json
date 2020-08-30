@@ -1,0 +1,35 @@
+{
+  "name": "glowing-docker-postgres",
+  "version": "0.0.1",
+  "description": "A Node/Postgres docker boilerplate",
+  "keywords": [
+    "docker",
+    "nodejs",
+    "postgres"
+  ],
+  "main": "dist/src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ogwurujohnson/glowing-docker-postgres.git"
+  },
+  "author": "ogwurujohnson <ogwurujohnson@gmail.com>",
+  "license": "MIT",
+  "bugs": "https://github.com/ogwurujohnson/glowing-docker-postgres/issues",
+  "scripts": {
+    "prebuild": "yarn run lint && yarn run clean",
+    "build": "tsc",
+    "start": "TS_NODE_PROJECT='./tsconfig.json' ts-node-dev --respawn -r dotenv/config ./src src/index.ts",
+    "lint": "eslint --fix ./src --ext .ts",
+    "clean": "rimraf dist",
+    "test": ""
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "knex": "^0.21.5"
+  },
+  "peerDependencies": {},
+  "engines": {
+    "node": ">=12.16",
+    "yarn": ">=1.22"
+  }
+}

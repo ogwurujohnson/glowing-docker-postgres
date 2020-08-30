@@ -1,0 +1,1 @@
+CREATE DATABASE your_db_name;
